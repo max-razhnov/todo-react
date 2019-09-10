@@ -1,5 +1,5 @@
 // @flow
-import { React, Component } from "react";
+import React from "react";
 import "./App.css";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
@@ -9,7 +9,7 @@ type State = {
   todoItems: Array<object>
 };
 
-class App extends Component<State> {
+class App extends React.Component<State> {
   constructor() {
     super();
     this.state = { todoItems };
