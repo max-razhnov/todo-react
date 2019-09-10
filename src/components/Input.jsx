@@ -1,13 +1,25 @@
+// @flow
 import React from "react";
 
-const Input = props => {
+type Props = {
+  type?: string,
+  id?: string | number,
+  placeholder?: string,
+  value?: string,
+  style?: string,
+  done?: String,
+  readOnly: boolean,
+  color?: string
+};
+
+const Input = (props: Props) => {
   const {
     type = "text",
     id,
     placeholder = "What you want to do?",
     value,
     done,
-    readonly = false,
+    readOnly = false,
     style
   } = props;
 
@@ -20,10 +32,10 @@ const Input = props => {
       value={value}
       style={{
         textDecoration: done ? "line-through" : "none",
-        color: style ? style.color : ""
+        color: style ? style : ""
       }}
       maxLength={80}
-      readOnly={readonly}
+      readOnly={readOnly}
     />
   );
 };

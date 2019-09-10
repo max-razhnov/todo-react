@@ -1,11 +1,18 @@
+// @flow
 import React from "react";
 import Input from "./Input";
 
-const TodoList = props => {
+type Props = {
+  todoItems?: Array<object>,
+  removeItem?: Function | object,
+  completeItem?: Function | object
+};
+
+const TodoList = (props: Props) => {
   const { todoItems, removeItem, completeItem } = props;
 
   return todoItems.length !== 0
-    ? todoItems.map((item, id) => {
+    ? todoItems.map<object>((item: object, id: number) => {
         return (
           <div key={id} className="field">
             <p className="control has-icons-left has-icons-right">
@@ -13,9 +20,9 @@ const TodoList = props => {
                 type="email"
                 value={item.value}
                 id={id}
-                readonly
+                readOnly
                 done={item.done}
-                style={{ color: item.done ? "red" : "green" }}
+                style={item.done ? "red" : "green"}
               />
               <span
                 className="icon is-small is-left"
@@ -29,7 +36,7 @@ const TodoList = props => {
                     color: item.done ? "red" : "green",
                     pointerEvents: "auto"
                   }}
-                  onClick={ev => {
+                  onClick={(ev: SyntheticEvent<HTMLButtonElement>) => {
                     completeItem(+ev.currentTarget.id);
                   }}></i>
               </span>
@@ -37,7 +44,7 @@ const TodoList = props => {
                 <i
                   id={id}
                   className="delete"
-                  onClick={ev => {
+                  onClick={(ev?: SyntheticEvent<HTMLButtonElement>) => {
                     removeItem(+ev.currentTarget.id);
                   }}>
                   >

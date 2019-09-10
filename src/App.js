@@ -1,10 +1,15 @@
-import React from "react";
+// @flow
+import { React, Component } from "react";
 import "./App.css";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import todoItems from "./components/constants";
 
-class App extends React.Component {
+type State = {
+  todoItems: Array<object>
+};
+
+class App extends Component<State> {
   constructor() {
     super();
     this.state = { todoItems };
@@ -40,7 +45,7 @@ class App extends React.Component {
     });
   }
 
-  removeItem(index) {
+  removeItem(index: number) {
     let { todoItems } = this.state;
     let newtodoItems = [];
 
@@ -84,11 +89,10 @@ class App extends React.Component {
           </h1>
           <div className="field">
             <div className="control has-icons-left has-icons-right">
-              <Input id="start-input" readonly={false} />
+              <Input id="start-input" readOnly={false} />
               <button
                 className={"button is-primary is-smal"}
-                onClick={this.addItem}
-              >
+                onClick={this.addItem}>
                 add item
               </button>
             </div>
