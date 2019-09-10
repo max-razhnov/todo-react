@@ -16,4 +16,14 @@ const todoItems = [
   }
 ];
 
-export default todoItems;
+const setAnimation = ev => {
+  ev.currentTarget.style.opacity = "0.8";
+  ev.currentTarget.style.transition = "0.5s ease-out";
+};
+
+const clearAnimation = ev => {
+  ev.currentTarget.style.opacity = "1";
+  ev.currentTarget.style.transition = "0.5s ease-out";
+};
+
+export { todoItems, setAnimation, clearAnimation };

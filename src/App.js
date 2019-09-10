@@ -3,7 +3,11 @@ import React from "react";
 import "./App.css";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
-import todoItems from "./components/constants";
+import {
+  todoItems,
+  setAnimation,
+  clearAnimation
+} from "./components/constants";
 
 type State = {
   todoItems: Array<object>
@@ -33,17 +37,21 @@ class App extends React.Component<State> {
     const inputs = [...document.getElementsByClassName("field")];
     inputs.forEach((item, id) => {
       if (id !== 0) {
-        item.addEventListener("mouseover", () => {
-          item.style.opacity = "0.8";
-          item.style.transition = "0.5s ease-out";
-        });
-        item.addEventListener("mouseout", () => {
-          item.style.opacity = "1";
-          item.style.transition = "0.5s ease-out";
-        });
+        item.addEventListener("mouseover", setAnimation);
+        item.addEventListener("mouseout", clearAnimation);
       }
     });
   }
+  // find component and delete only his lisnter in removeItem
+  // componentWillUnmount() {
+  //   const inputs = [...document.getElementsByClassName("field")];
+  //   inputs.forEach((item, id) => {
+  //     if (id !== 0) {
+  //       item.removeEventListener("mouseover", setAnimation);
+  //       item.removeEventListener("mouseout", clearAnimation);
+  //     }
+  //   });
+  // }
 
   removeItem(index: number) {
     let { todoItems } = this.state;
