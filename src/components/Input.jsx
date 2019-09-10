@@ -7,7 +7,8 @@ const Input = props => {
     placeholder = "What you want to do?",
     value,
     done,
-    readonly = false
+    readonly = false,
+    style
   } = props;
 
   return (
@@ -19,7 +20,7 @@ const Input = props => {
       value={value}
       style={{
         textDecoration: done ? "line-through" : "none",
-        color: done ? "red" : "green"
+        color: style ? style.color : ""
       }}
       maxLength={80}
       readOnly={readonly}

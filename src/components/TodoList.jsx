@@ -15,11 +15,11 @@ const TodoList = props => {
                 id={id}
                 readonly
                 done={item.done}
+                style={{ color: item.done ? "red" : "green" }}
               />
               <span
                 className="icon is-small is-left"
-                style={{ background: "none", border: "none" }}
-              >
+                style={{ background: "none", border: "none" }}>
                 <i
                   id={id}
                   className={
@@ -31,8 +31,7 @@ const TodoList = props => {
                   }}
                   onClick={ev => {
                     completeItem(+ev.currentTarget.id);
-                  }}
-                ></i>
+                  }}></i>
               </span>
               <span className="icon is-small is-right">
                 <i
@@ -40,8 +39,7 @@ const TodoList = props => {
                   className="delete"
                   onClick={ev => {
                     removeItem(+ev.currentTarget.id);
-                  }}
-                >
+                  }}>
                   >
                 </i>
               </span>
