@@ -9,7 +9,13 @@ type Props = {
 };
 
 const TodoList = (props: Props) => {
-  const { todoItems, removeItem, completeItem } = props;
+  const {
+    todoItems,
+    removeItem,
+    completeItem,
+    onmouseover,
+    onmouseout
+  } = props;
 
   return todoItems.length !== 0
     ? todoItems.map<object>((item: object, id: number) => {
@@ -17,12 +23,13 @@ const TodoList = (props: Props) => {
           <div key={id} className="field">
             <p className="control has-icons-left has-icons-right">
               <Input
-                type="email"
                 value={item.value}
                 id={id}
                 readOnly
                 done={item.done}
                 style={item.done ? "red" : "green"}
+                onmouseover={onmouseover}
+                onmouseout={onmouseout}
               />
               <span
                 className="icon is-small is-left"

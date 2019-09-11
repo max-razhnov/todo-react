@@ -3,11 +3,7 @@ import React from "react";
 import "./App.css";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
-import {
-  todoItems,
-  setAnimation,
-  clearAnimation
-} from "./components/constants";
+import todoItems from "./components/constants";
 
 type State = {
   todoItems: Array<object>
@@ -20,8 +16,18 @@ class App extends React.Component<State> {
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.completeItem = this.completeItem.bind(this);
+    this.clearAnimation = this.clearAnimation.bind(this);
+    this.setAnimation = this.setAnimation.bind(this);
   }
 
+  setAnimation(ev) {
+    ev.currentTarget.style.opacity = "0.8";
+    ev.currentTarget.style.transition = "0.5s ease-out";
+  }
+  clearAnimation(ev) {
+    ev.currentTarget.style.opacity = "1";
+    ev.currentTarget.style.transition = "0.5s ease-out";
+  }
   addItem() {
     const value = document.getElementById("start-input").value;
     if (value.trim()) {
@@ -33,25 +39,6 @@ class App extends React.Component<State> {
       });
     }
   }
-  componentDidMount() {
-    const inputs = [...document.getElementsByClassName("field")];
-    inputs.forEach((item, id) => {
-      if (id !== 0) {
-        item.addEventListener("mouseover", setAnimation);
-        item.addEventListener("mouseout", clearAnimation);
-      }
-    });
-  }
-  // find component and delete only his lisnter in removeItem
-  // componentWillUnmount() {
-  //   const inputs = [...document.getElementsByClassName("field")];
-  //   inputs.forEach((item, id) => {
-  //     if (id !== 0) {
-  //       item.removeEventListener("mouseover", setAnimation);
-  //       item.removeEventListener("mouseout", clearAnimation);
-  //     }
-  //   });
-  // }
 
   removeItem(index: number) {
     let { todoItems } = this.state;
@@ -109,6 +96,8 @@ class App extends React.Component<State> {
             removeItem={this.removeItem}
             todoItems={todoItems}
             completeItem={this.completeItem}
+            onmouseover={this.setAnimation}
+            onmouseout={this.clearAnimation}
           />
         </header>
       </div>

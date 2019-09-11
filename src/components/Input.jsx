@@ -9,7 +9,9 @@ type Props = {
   style?: string,
   done?: String,
   readOnly: boolean,
-  color?: string
+  color?: string,
+  onmouseover?: Funtion | undefined,
+  onmouseout?: Function | undefined
 };
 
 const Input = (props: Props) => {
@@ -20,7 +22,9 @@ const Input = (props: Props) => {
     value,
     done,
     readOnly = false,
-    style
+    style,
+    onmouseover,
+    onmouseout
   } = props;
 
   return (
@@ -36,6 +40,8 @@ const Input = (props: Props) => {
       }}
       maxLength={80}
       readOnly={readOnly}
+      onMouseOver={onmouseover}
+      onMouseOut={onmouseout}
     />
   );
 };
