@@ -1,4 +1,4 @@
-![Heroku](http://heroku-badge.herokuapp.com/?app=todo-react777&style=flat)
+![Heroku](http://heroku-badge.herokuapp.com/?app=todo-react777)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
