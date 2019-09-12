@@ -1,27 +1,14 @@
-// @flow
 import React from "react";
+import PropTypes from "prop-types";
 
-type Props = {
-  type?: string,
-  id?: string | number,
-  placeholder?: string,
-  value?: string,
-  style?: string,
-  done?: String,
-  readOnly: boolean,
-  color?: string,
-  onmouseover?: Funtion | undefined,
-  onmouseout?: Function | undefined
-};
-
-const Input = (props: Props) => {
+const Input = props => {
   const {
-    type = "text",
+    type,
     id,
-    placeholder = "What you want to do?",
+    placeholder,
     value,
     done,
-    readOnly = false,
+    readOnly,
     style,
     onmouseover,
     onmouseout
@@ -44,6 +31,27 @@ const Input = (props: Props) => {
       onMouseOut={onmouseout}
     />
   );
+};
+
+Input.propTypes = {
+  type: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  placeholder: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  style: PropTypes.string,
+  done: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  color: PropTypes.string,
+  onmouseover: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  onmouseout: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+};
+
+Input.defaultProps = {
+  type: "text",
+  placeholder: "What you want to do?",
+  readOnly: false,
+  onmouseover: null,
+  onmouseout: null
 };
 
 export default Input;

@@ -1,15 +1,10 @@
-// @flow
 import React from "react";
 import "./App.css";
 import Input from "./components/Input";
 import TodoList from "./components/TodoList";
 import todoItems from "./components/constants";
 
-type State = {
-  todoItems: Array<object>
-};
-
-class App extends React.Component<State> {
+class App extends React.Component {
   constructor() {
     super();
     this.state = { todoItems };
@@ -24,10 +19,12 @@ class App extends React.Component<State> {
     ev.currentTarget.style.opacity = "0.8";
     ev.currentTarget.style.transition = "0.5s ease-out";
   }
+
   clearAnimation(ev) {
     ev.currentTarget.style.opacity = "1";
     ev.currentTarget.style.transition = "0.5s ease-out";
   }
+
   addItem() {
     const value = document.getElementById("start-input").value;
     if (value.trim()) {
@@ -40,7 +37,7 @@ class App extends React.Component<State> {
     }
   }
 
-  removeItem(index: number) {
+  removeItem(index) {
     let { todoItems } = this.state;
     let newtodoItems = [];
 

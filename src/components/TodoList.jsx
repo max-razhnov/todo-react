@@ -1,16 +1,10 @@
-// @flow
 import React from "react";
 import Input from "./Input";
+import PropTypes from "prop-types";
 
-type Props = {
-  todoItems?: Array<object>,
-  removeItem?: Function | object,
-  completeItem?: Function | object
-};
-
-const TodoList = (props: Props) => {
+const TodoList = props => {
   const {
-    todoItems,
+    todoItems = [],
     removeItem,
     completeItem,
     onmouseover,
@@ -18,50 +12,58 @@ const TodoList = (props: Props) => {
   } = props;
 
   return todoItems.length !== 0
-    ? todoItems.map<object>((item: object, id: number) => {
-        return (
-          <div key={id} className="field">
-            <p className="control has-icons-left has-icons-right">
-              <Input
-                value={item.value}
-                id={id}
-                readOnly
-                done={item.done}
-                style={item.done ? "red" : "green"}
-                onmouseover={onmouseover}
-                onmouseout={onmouseout}
-              />
-              <span
-                className="icon is-small is-left"
-                style={{ background: "none", border: "none" }}>
-                <i
+    ? [
+        ...todoItems.map((item, id) => {
+          return (
+            <div key={id} className="field">
+              <p className="control has-icons-left has-icons-right">
+                <Input
+                  value={item.value}
                   id={id}
-                  className={
-                    item.done ? "fas fa-minus-circle" : "fas fa-check-circle"
-                  }
-                  style={{
-                    color: item.done ? "red" : "green",
-                    pointerEvents: "auto"
-                  }}
-                  onClick={(ev: SyntheticEvent<HTMLButtonElement>) => {
-                    completeItem(+ev.currentTarget.id);
-                  }}></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i
-                  id={id}
-                  className="delete"
-                  onClick={(ev?: SyntheticEvent<HTMLButtonElement>) => {
-                    removeItem(+ev.currentTarget.id);
-                  }}>
-                  >
-                </i>
-              </span>
-            </p>
-          </div>
-        );
-      })
+                  readOnly
+                  done={item.done}
+                  style={item.done ? "red" : "green"}
+                  onmouseover={onmouseover}
+                  onmouseout={onmouseout}
+                />
+                <span
+                  className="icon is-small is-left"
+                  style={{ background: "none", border: "none" }}>
+                  <i
+                    id={id}
+                    className={
+                      item.done ? "fas fa-minus-circle" : "fas fa-check-circle"
+                    }
+                    style={{
+                      color: item.done ? "red" : "green",
+                      pointerEvents: "auto"
+                    }}
+                    onClick={ev => {
+                      completeItem(+ev.currentTarget.id);
+                    }}></i>
+                </span>
+                <span className="icon is-small is-right">
+                  <i
+                    id={id}
+                    className="delete"
+                    onClick={ev => {
+                      removeItem(+ev.currentTarget.id);
+                    }}>
+                    >
+                  </i>
+                </span>
+              </p>
+            </div>
+          );
+        })
+      ]
     : null;
+};
+
+TodoList.propTypes = {
+  todoItems: PropTypes.arrayOf(PropTypes.object),
+  removeItem: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  completeItem: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };
 
 export default TodoList;
