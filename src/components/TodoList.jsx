@@ -28,7 +28,12 @@ const TodoList = props => {
                 />
                 <span
                   className="icon is-small is-left"
-                  style={{ background: "none", border: "none" }}>
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer"
+                  }}
+                >
                   <i
                     id={id}
                     className={
@@ -40,7 +45,8 @@ const TodoList = props => {
                     }}
                     onClick={ev => {
                       completeItem(+ev.currentTarget.id);
-                    }}></i>
+                    }}
+                  ></i>
                 </span>
                 <span className="icon is-small is-right">
                   <i
@@ -48,7 +54,8 @@ const TodoList = props => {
                     className="delete"
                     onClick={ev => {
                       removeItem(+ev.currentTarget.id);
-                    }}>
+                    }}
+                  >
                     >
                   </i>
                 </span>
