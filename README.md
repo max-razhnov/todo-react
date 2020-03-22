@@ -1,5 +1,7 @@
 ![Heroku](http://heroku-badge.herokuapp.com/?app=todo-react777)
 
+[View todo app](https://razhnoff.github.io/todoReact/ "todo app")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
