@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const TodoList = props => {
   const {
-    todoItems = [],
+    todoItems,
     removeItem,
     completeItem,
     onmouseover,
@@ -12,59 +12,61 @@ const TodoList = props => {
   } = props;
 
   return todoItems.length !== 0
-    ? [
-        ...todoItems.map((item, id) => {
-          return (
-            <div key={id} className="field">
-              <p className="control has-icons-left has-icons-right">
-                <Input
-                  value={item.value}
+    ? todoItems.map((item, id) => {
+        return (
+          <div key={id} className="field">
+            <p className="control has-icons-left has-icons-right">
+              <Input
+                value={item.value}
+                id={id}
+                readOnly
+                done={item.done}
+                style={item.done ? "red" : "green"}
+                onmouseover={onmouseover}
+                onmouseout={onmouseout}
+              />
+              <span
+                className="icon is-small is-left"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+              >
+                <i
                   id={id}
-                  readOnly
-                  done={item.done}
-                  style={item.done ? "red" : "green"}
-                  onmouseover={onmouseover}
-                  onmouseout={onmouseout}
-                />
-                <span
-                  className="icon is-small is-left"
+                  className={
+                    item.done ? "fas fa-minus-circle" : "fas fa-check-circle"
+                  }
                   style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer"
+                    color: item.done ? "red" : "green",
+                    pointerEvents: "auto"
+                  }}
+                  onClick={ev => {
+                    completeItem(+ev.currentTarget.id);
+                  }}
+                ></i>
+              </span>
+              <span className="icon is-small is-right">
+                <i
+                  id={id}
+                  className="delete"
+                  onClick={ev => {
+                    removeItem(+ev.currentTarget.id);
                   }}
                 >
-                  <i
-                    id={id}
-                    className={
-                      item.done ? "fas fa-minus-circle" : "fas fa-check-circle"
-                    }
-                    style={{
-                      color: item.done ? "red" : "green",
-                      pointerEvents: "auto"
-                    }}
-                    onClick={ev => {
-                      completeItem(+ev.currentTarget.id);
-                    }}
-                  ></i>
-                </span>
-                <span className="icon is-small is-right">
-                  <i
-                    id={id}
-                    className="delete"
-                    onClick={ev => {
-                      removeItem(+ev.currentTarget.id);
-                    }}
                   >
-                    >
-                  </i>
-                </span>
-              </p>
-            </div>
-          );
-        })
-      ]
+                </i>
+              </span>
+            </p>
+          </div>
+        );
+      })
     : null;
+};
+
+TodoList.defaultProps = {
+  todoItems: []
 };
 
 TodoList.propTypes = {

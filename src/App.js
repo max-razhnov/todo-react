@@ -32,7 +32,7 @@ class App extends React.Component {
       todoItems.push({ id: todoItems.length, value: value, done: false });
       document.getElementById("start-input").value = "";
       this.setState({
-        todoItems: todoItems
+        todoItems: [...todoItems]
       });
     }
   }
@@ -40,15 +40,13 @@ class App extends React.Component {
   removeItem(index) {
     let { todoItems } = this.state;
     let newtodoItems = [];
-
     for (let i = 0; i < todoItems.length; i++) {
       if (i !== index) {
         newtodoItems.push(todoItems[i]);
       }
     }
-    todoItems = [...newtodoItems];
     this.setState({
-      todoItems: todoItems
+      todoItems: [...newtodoItems]
     });
   }
 
@@ -65,9 +63,8 @@ class App extends React.Component {
         arr.unshift(item);
       }
     });
-    todoItems = [...arr];
     this.setState({
-      todoItems: todoItems
+      todoItems: [...arr]
     });
   }
 
@@ -91,7 +88,7 @@ class App extends React.Component {
           </div>
           <TodoList
             removeItem={this.removeItem}
-            todoItems={todoItems}
+            todoItems={[...todoItems]}
             completeItem={this.completeItem}
             onmouseover={this.setAnimation}
             onmouseout={this.clearAnimation}
